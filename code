@@ -275,7 +275,7 @@ num_of_leds = react_time;
 
 switch (num_of_leds) {
   // Ab 140
-  // beginnen damit der benutzer nicht dauerhaft drückt
+  // beginnen damit der benutzer nicht dauerhaft drückt und eine LED angezeigt bekommt
 case 140 ... 170:
   oneLed();
   break;
