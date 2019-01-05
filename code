@@ -1,0 +1,308 @@
+//Projekt eingebettete Software WS 1819
+//heiko Jedamski
+//Reaktionstester
+//1st version
+
+//Der Tester soll wie folgt benutzt werden:
+//Nach dem Einschalten zeigt der Tester eine
+//Einschaltanimation und geht dann in Ruhezustand über
+//Durch drücken der Taste wird der Tester aktiviert.
+//Der Benutzer drück die Taste erneut, um den Test zu starten.
+// Daraufhin wird eine Animation gezeigt und nach einer
+// zufälligen Zeit gehen schließlich alle LEDs aus.
+// Der Benutzer soll dann schnell wie möglich wieder
+// den Knopf drücken. Die Zeit vom Erlöschen der LEDs
+// bis zum Drücken wird gemessen und dann mit den LEDs
+// angezeigt(100ms 1 LED) Dieser Vorgang kann beliebig
+// häufig wiederholt werden, um weitere Tests zu machen.
+// Nach einer bestimmten Zeit des Nicht-Benutzt-Werdens
+// geht der Reaktionstester in den Ruhezustand.
+
+//Pins definieren
+const int led1 = 3;
+const int led2 = 4;
+const int led3 = 5;
+const int led4 = 6;
+const int led5 = 7;
+const int led6 = 8;
+const int led7 = 9;
+const int buttonPin = 2;
+
+//Zeitzähler 32 Bit groß
+unsigned long start_time;
+unsigned long react_time;
+unsigned long random_time;
+unsigned int num_of_leds;
+
+//Zustände
+
+void oneLed () {
+  digitalWrite(led1, HIGH);
+  digitalWrite(led2, LOW);
+  digitalWrite(led3, LOW);
+  digitalWrite(led4, LOW);
+  digitalWrite(led5, LOW);
+  digitalWrite(led6, LOW);
+  digitalWrite(led7, LOW);
+}
+
+void twoLed () {
+  digitalWrite(led1, HIGH);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led3, LOW);
+  digitalWrite(led4, LOW);
+  digitalWrite(led5, LOW);
+  digitalWrite(led6, LOW);
+  digitalWrite(led7, LOW);
+}
+
+void threeLed () {
+  digitalWrite(led1, HIGH);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led3, HIGH);
+  digitalWrite(led4, LOW);
+  digitalWrite(led5, LOW);
+  digitalWrite(led6, LOW);
+  digitalWrite(led7, LOW);
+}
+void fourLed () {
+  digitalWrite(led1, HIGH);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led3, HIGH);
+  digitalWrite(led4, HIGH);
+  digitalWrite(led5, LOW);
+  digitalWrite(led6, LOW);
+  digitalWrite(led7, LOW);
+}
+void fiveLed () {
+  digitalWrite(led1, HIGH);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led3, HIGH);
+  digitalWrite(led4, HIGH);
+  digitalWrite(led5, HIGH);
+  digitalWrite(led6, LOW);
+  digitalWrite(led7, LOW);
+}
+void sixLed () {
+  digitalWrite(led1, HIGH);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led3, HIGH);
+  digitalWrite(led4, HIGH);
+  digitalWrite(led5, HIGH);
+  digitalWrite(led6, HIGH);
+  digitalWrite(led7, LOW);
+}
+void sevenLed () {
+  digitalWrite(led1, HIGH);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led3, HIGH);
+  digitalWrite(led4, HIGH);
+  digitalWrite(led5, HIGH);
+  digitalWrite(led6, HIGH);
+  digitalWrite(led7, HIGH);
+}
+
+//Einschaltanimation
+void animation() {
+  digitalWrite(led4, HIGH);
+  delay(500);
+  digitalWrite(led4, LOW);
+  delay(500);
+  digitalWrite(led4, HIGH);
+  delay(350);
+  digitalWrite(led4, LOW);
+  delay(350);
+  digitalWrite(led4, HIGH);
+  delay(250);
+  digitalWrite(led4, LOW);
+  delay(250);
+  digitalWrite(led4, HIGH);
+  delay(200);
+  digitalWrite(led4, LOW);
+  delay(200);
+  digitalWrite(led4, HIGH);
+  delay(125);
+  digitalWrite(led4, LOW);
+  delay(125);
+  digitalWrite(led4, HIGH);
+  delay(100);
+  digitalWrite(led4, LOW);
+  delay(100);
+  digitalWrite(led4, HIGH);
+  delay(50);
+  digitalWrite(led4, LOW);
+  delay(100);
+  digitalWrite(led1, HIGH);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led3, HIGH);
+  digitalWrite(led4, HIGH);
+  digitalWrite(led5, HIGH);
+  digitalWrite(led6, HIGH);
+  digitalWrite(led7, HIGH);
+  delay(1000);
+  digitalWrite(led1, HIGH);
+  digitalWrite(led2, LOW);
+  digitalWrite(led3, LOW);
+  digitalWrite(led4, LOW);
+  digitalWrite(led5, LOW);
+  digitalWrite(led6, LOW);
+  digitalWrite(led7, HIGH);
+  delay(1000);
+  digitalWrite(led1, LOW);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led3, LOW);
+  digitalWrite(led4, LOW);
+  digitalWrite(led5, LOW);
+  digitalWrite(led6, HIGH);
+  digitalWrite(led7, LOW);
+  delay(1000);
+  digitalWrite(led1, LOW);
+  digitalWrite(led2, LOW);
+  digitalWrite(led3, HIGH);
+  digitalWrite(led4, LOW);
+  digitalWrite(led5, HIGH);
+  digitalWrite(led6, LOW);
+  digitalWrite(led7, LOW);
+  delay(1000);
+  digitalWrite(led1, LOW);
+  digitalWrite(led2, LOW);
+  digitalWrite(led3, LOW);
+  digitalWrite(led4, HIGH);
+  digitalWrite(led5, LOW);
+  digitalWrite(led6, LOW);
+  digitalWrite(led7, LOW);
+  delay(2000);
+  digitalWrite(led4, LOW);
+}
+
+void reset () {
+  digitalWrite(led1, LOW);
+  digitalWrite(led2, LOW);
+  digitalWrite(led3, LOW);
+  digitalWrite(led4, LOW);
+  digitalWrite(led5, LOW);
+  digitalWrite(led6, LOW);
+  digitalWrite(led7, LOW);
+
+}
+
+void testAnimation () {
+  digitalWrite(led1, HIGH);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led3, HIGH);
+  digitalWrite(led4, HIGH);
+  digitalWrite(led5, HIGH);
+  digitalWrite(led6, HIGH);
+  digitalWrite(led7, HIGH);
+  delay(100);
+  digitalWrite(led1, LOW);
+  digitalWrite(led2, LOW);
+  digitalWrite(led3, LOW);
+  digitalWrite(led4, LOW);
+  digitalWrite(led5, LOW);
+  digitalWrite(led6, LOW);
+  digitalWrite(led7, LOW);
+  delay(100);
+  digitalWrite(led1, HIGH);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led3, HIGH);
+  digitalWrite(led4, HIGH);
+  digitalWrite(led5, HIGH);
+  digitalWrite(led6, HIGH);
+  digitalWrite(led7, HIGH);
+}
+
+void setup() {
+  Serial.begin(9600);
+  randomSeed(analogRead(0));
+  //LEDs und Button initialisieren
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+  pinMode(led4, OUTPUT);
+  pinMode(led5, OUTPUT);
+  pinMode(led6, OUTPUT);
+  pinMode(led7, OUTPUT);
+  pinMode(buttonPin, INPUT);
+  animation();
+}
+// Funktion, die langes halten ermöglicht
+void wait_until_release() {
+  while (digitalRead(buttonPin) != LOW) {
+  }
+}
+void loop() {
+  // Test aktivieren
+  if (digitalRead(buttonPin) == HIGH) {
+    //loslassen des Tasters
+    wait_until_release();
+    start_time = millis();
+    // Schleife um zwei mal hintereinander zu drücken
+    while ((millis() - start_time < 10000)) {
+      // Test starten
+      if (digitalRead(buttonPin) == HIGH) {
+        //loslassen des Tasters
+        wait_until_release();
+        test_loop();
+        delay(4000);
+        reset();
+        break;
+      }
+    }
+
+  }
+}
+void test_loop() {
+  //Zeitmessung starten
+  start_time = millis();
+  //Generieren der Zufallszeit
+  random_time = random(10001);
+  //Ausgabe der Zufallszeit
+  Serial.println(random_time);
+  // TestAnimation
+  while ((millis() - start_time < random_time)) {
+    testAnimation();
+  }
+  reset();
+  // Zeitmessung nach dem alle LEDs ausgschaltet sind
+  start_time = millis();
+  // Solange nicht gedrückt wurde bleibt er in while, wenn HIGH geht er aus while raus und errechnet die Reaktionszeit
+  while (digitalRead(buttonPin) != HIGH) {
+  }
+react_time = millis() - start_time;
+Serial.println(react_time);
+num_of_leds = react_time;
+
+switch (num_of_leds) {
+  // Ab 140
+  // beginnen damit der benutzer nicht dauerhaft drückt
+case 140 ... 170:
+  oneLed();
+  break;
+
+case 171 ... 200:
+  twoLed();
+  break;
+
+case 201 ... 300:
+  threeLed();
+  break;
+
+case 301 ... 400:
+  fourLed();
+  break;
+
+case 401 ... 500:
+  fiveLed();
+  break;
+
+case 501 ... 600:
+  sixLed();
+  break;
+
+  // Auf 7 LEDs begrenzt -> alles über 600 ms mit 7 LEDs anzeigen
+default:
+  sevenLed();
+  break;
+}
+}
