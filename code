@@ -1,7 +1,6 @@
 //Projekt eingebettete Software WS 1819
 //heiko Jedamski
 //Reaktionstester
-//1st version
 
 //Der Tester soll wie folgt benutzt werden:
 //Nach dem Einschalten zeigt der Tester eine
@@ -33,6 +32,7 @@ unsigned long start_time;
 unsigned long react_time;
 unsigned long random_time;
 unsigned int num_of_leds;
+unsigned int pressed;
 
 //Zustände
 
@@ -104,75 +104,105 @@ void sevenLed () {
 
 //Einschaltanimation
 void animation() {
-  digitalWrite(led4, HIGH);
-  delay(500);
-  digitalWrite(led4, LOW);
-  delay(500);
-  digitalWrite(led4, HIGH);
-  delay(350);
-  digitalWrite(led4, LOW);
-  delay(350);
-  digitalWrite(led4, HIGH);
-  delay(250);
-  digitalWrite(led4, LOW);
-  delay(250);
-  digitalWrite(led4, HIGH);
-  delay(200);
-  digitalWrite(led4, LOW);
-  delay(200);
-  digitalWrite(led4, HIGH);
-  delay(125);
-  digitalWrite(led4, LOW);
-  delay(125);
-  digitalWrite(led4, HIGH);
-  delay(100);
-  digitalWrite(led4, LOW);
-  delay(100);
-  digitalWrite(led4, HIGH);
-  delay(50);
-  digitalWrite(led4, LOW);
-  delay(100);
-  digitalWrite(led1, HIGH);
-  digitalWrite(led2, HIGH);
-  digitalWrite(led3, HIGH);
-  digitalWrite(led4, HIGH);
-  digitalWrite(led5, HIGH);
-  digitalWrite(led6, HIGH);
   digitalWrite(led7, HIGH);
-  delay(1000);
-  digitalWrite(led1, HIGH);
-  digitalWrite(led2, LOW);
-  digitalWrite(led3, LOW);
-  digitalWrite(led4, LOW);
-  digitalWrite(led5, LOW);
-  digitalWrite(led6, LOW);
-  digitalWrite(led7, HIGH);
-  delay(1000);
-  digitalWrite(led1, LOW);
-  digitalWrite(led2, HIGH);
-  digitalWrite(led3, LOW);
-  digitalWrite(led4, LOW);
-  digitalWrite(led5, LOW);
-  digitalWrite(led6, HIGH);
-  digitalWrite(led7, LOW);
-  delay(1000);
-  digitalWrite(led1, LOW);
-  digitalWrite(led2, LOW);
-  digitalWrite(led3, HIGH);
-  digitalWrite(led4, LOW);
+  delay(300);
   digitalWrite(led5, HIGH);
-  digitalWrite(led6, LOW);
-  digitalWrite(led7, LOW);
-  delay(1000);
-  digitalWrite(led1, LOW);
-  digitalWrite(led2, LOW);
-  digitalWrite(led3, LOW);
+  delay(300);
+  digitalWrite(led3, HIGH);
+  delay(300);
+  digitalWrite(led1, HIGH);
+  delay(300);
+  // zweiter durchgang
+  digitalWrite(led2, HIGH);
   digitalWrite(led4, HIGH);
+  digitalWrite(led6, HIGH);
+  digitalWrite(led1, LOW);
+  digitalWrite(led3, LOW);
   digitalWrite(led5, LOW);
-  digitalWrite(led6, LOW);
   digitalWrite(led7, LOW);
+  delay(300);
+  digitalWrite(led2, LOW);
+  digitalWrite(led4, LOW);
+  digitalWrite(led6, LOW);
+  digitalWrite(led1, HIGH);
+  digitalWrite(led3, HIGH);
+  digitalWrite(led5, HIGH);
+  digitalWrite(led7, HIGH);
+  delay(300);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led4, HIGH);
+  digitalWrite(led6, HIGH);
+  digitalWrite(led1, LOW);
+  digitalWrite(led3, LOW);
+  digitalWrite(led5, LOW);
+  digitalWrite(led7, LOW);
+  delay(300);
+  digitalWrite(led2, LOW);
+  digitalWrite(led4, LOW);
+  digitalWrite(led6, LOW);
+  digitalWrite(led1, HIGH);
+  digitalWrite(led3, HIGH);
+  digitalWrite(led5, HIGH);
+  digitalWrite(led7, HIGH);
+  delay(300);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led4, HIGH);
+  digitalWrite(led6, HIGH);
+  digitalWrite(led1, LOW);
+  digitalWrite(led3, LOW);
+  digitalWrite(led5, LOW);
+  digitalWrite(led7, LOW);
+  delay(300);
+  digitalWrite(led2, LOW);
+  digitalWrite(led4, LOW);
+  digitalWrite(led6, LOW);
+  digitalWrite(led1, HIGH);
+  digitalWrite(led3, HIGH);
+  digitalWrite(led5, HIGH);
+  digitalWrite(led7, HIGH);
+  delay(300);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led4, HIGH);
+  digitalWrite(led6, HIGH);
+  digitalWrite(led1, LOW);
+  digitalWrite(led3, LOW);
+  digitalWrite(led5, LOW);
+  digitalWrite(led7, LOW);
+  delay(300);
+  digitalWrite(led2, LOW);
+  digitalWrite(led4, LOW);
+  digitalWrite(led6, LOW);
+  digitalWrite(led1, HIGH);
+  digitalWrite(led3, HIGH);
+  digitalWrite(led5, HIGH);
+  digitalWrite(led7, HIGH);
+  delay(300);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led4, HIGH);
+  digitalWrite(led6, HIGH);
+  digitalWrite(led1, LOW);
+  digitalWrite(led3, LOW);
+  digitalWrite(led5, LOW);
+  digitalWrite(led7, LOW);
+  delay(300);
+  digitalWrite(led2, LOW);
+  digitalWrite(led4, LOW);
+  digitalWrite(led6, LOW);
+  digitalWrite(led1, HIGH);
+  digitalWrite(led3, HIGH);
+  digitalWrite(led5, HIGH);
+  digitalWrite(led7, HIGH);
+  delay(300);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led4, HIGH);
+  digitalWrite(led6, HIGH);
+  digitalWrite(led1, LOW);
+  digitalWrite(led3, LOW);
+  digitalWrite(led5, LOW);
+  digitalWrite(led7, LOW);
+  delay(500);
+  reset();
   delay(2000);
-  digitalWrite(led4, LOW);
 }
 
 void reset () {
@@ -183,7 +213,7 @@ void reset () {
   digitalWrite(led5, LOW);
   digitalWrite(led6, LOW);
   digitalWrite(led7, LOW);
-
+  pressed = 0;
 }
 
 void testAnimation () {
@@ -224,33 +254,31 @@ void setup() {
   pinMode(led6, OUTPUT);
   pinMode(led7, OUTPUT);
   pinMode(buttonPin, INPUT);
+  pressed = 0;
   animation();
 }
 // Funktion, die langes halten ermöglicht
 void wait_until_release() {
   while (digitalRead(buttonPin) != LOW) {
+    // digitalWrite(led7, HIGH);
+    delay(100);
   }
+  // digitalWrite(led7, LOW);
 }
 void loop() {
   // Test aktivieren
   if (digitalRead(buttonPin) == HIGH) {
-    //loslassen des Tasters
+    pressed = pressed + 1;
     wait_until_release();
-    start_time = millis();
-    // Schleife um zwei mal hintereinander zu drücken
-    while ((millis() - start_time < 10000)) {
-      // Test starten
-      if (digitalRead(buttonPin) == HIGH) {
-        //loslassen des Tasters
-        wait_until_release();
-        test_loop();
-        delay(4000);
-        reset();
-        break;
-      }
-    }
-
   }
+  // Test starten
+  if (pressed == 2) {
+    test_loop();
+    delay(4000);
+    reset();
+  }
+
+
 }
 void test_loop() {
   //Zeitmessung starten
@@ -274,13 +302,12 @@ Serial.println(react_time);
 num_of_leds = react_time;
 
 switch (num_of_leds) {
-  // Ab 140
-  // beginnen damit der benutzer nicht dauerhaft drückt und eine LED angezeigt bekommt
-case 140 ... 170:
+  // Ab 140 beginnen damit der benutzer nicht dauerhaft drückt und 1 led angezeigt wird
+case 140 ... 174:
   oneLed();
   break;
 
-case 171 ... 200:
+case 175 ... 200:
   twoLed();
   break;
 
