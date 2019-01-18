@@ -242,10 +242,7 @@ void testAnimation () {
   digitalWrite(led7, HIGH);
 }
 
-void setup() {
-  Serial.begin(9600);
-  randomSeed(analogRead(0));
-  //LEDs und Button initialisieren
+void initial(){
   pinMode(led1, OUTPUT);
   pinMode(led2, OUTPUT);
   pinMode(led3, OUTPUT);
@@ -254,8 +251,6 @@ void setup() {
   pinMode(led6, OUTPUT);
   pinMode(led7, OUTPUT);
   pinMode(buttonPin, INPUT);
-  pressed = 0;
-  animation();
 }
 // Funktion, die langes halten ermöglicht
 void wait_until_release() {
@@ -265,6 +260,14 @@ void wait_until_release() {
   }
   // digitalWrite(led7, LOW);
 }
+void setup() {
+  Serial.begin(9600);
+  randomSeed(analogRead(0));
+  //LEDs und Button initialisieren
+  initial();
+ // pressed = 0;
+  animation();
+}
 void loop() {
   // Test aktivieren
   if (digitalRead(buttonPin) == HIGH) {
@@ -273,6 +276,7 @@ void loop() {
   }
   // Test starten
   if (pressed == 2) {
+    wait_until_release();
     test_loop();
     delay(4000);
     reset();
@@ -333,3 +337,4 @@ default:
   break;
 }
 }
+
