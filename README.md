@@ -13,4 +13,6 @@ Im Repository befinden sich mehrere Struktogramme.
 Diese sagen lediglich darüber aus, wie die geschriebenen Funktionen in dem CPP-File und letztlich in der ino-Datei zusammenwirken.
 Das Programm ist in eine ino,h und cpp-Datei aufgebaut -> Reaktometer.zip
 Zudem befinden sich zwei Dateien in dem Repository, die den Aufbau der Hardware darstellen.
+Schaltplan.fzz kann mit der entsprechenden Software geöffnet und verändert werden.
+
 
