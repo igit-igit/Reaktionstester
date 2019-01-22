@@ -16,7 +16,8 @@ Diese sagen lediglich etwas darüber aus, wie die geschriebenen Funktionen in de
 
 Das fertige Programm ist in eine ino,h und cpp-Datei aufgebaut -> "Reaktometer.zip"
 Zudem gibt es eine erste Version -> "Reaktionstester (mit Hardware)" 
-sowie eine Zwischenversion, bei der die Hardware von der Reaktionstester-Logik getrennt ist -> "Reaktionstest.zip"
+sowie eine Zwischenversion, bei der die Hardware von der Reaktionstester-Logik 
+getrennt ist -> "Reaktionstest.zip"
 
 "Schaltplan.fzz" und Schematik_Steckplatine zeigen den Aufbau der Hardware.
 Ersteres kann mit der entsprechenden Software geöffnet und verändert werden.
