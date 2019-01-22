@@ -9,10 +9,25 @@ Nun muss der Button so schnell wie möglich gedrückt werden.
 Die Reaktionszeit wird über 7 LEDs angezeigt.
 
 
+Verzeichnis:
+
 Im Repository befinden sich mehrere Struktogramme. 
-Diese sagen lediglich darüber aus, wie die geschriebenen Funktionen in dem CPP-File und letztlich in der ino-Datei zusammenwirken.
-Das Programm ist in eine ino,h und cpp-Datei aufgebaut -> Reaktometer.zip
-Zudem befinden sich zwei Dateien in dem Repository, die den Aufbau der Hardware darstellen.
-Schaltplan.fzz kann mit der entsprechenden Software geöffnet und verändert werden.
+Diese sagen lediglich etwas darüber aus, wie die geschriebenen Funktionen in dem CPP-File und letztlich in der ino-Datei zusammenwirken.
+
+Das fertige Programm ist in eine ino,h und cpp-Datei aufgebaut -> "Reaktometer.zip"
+Zudem gibt es eine erste Version -> "Reaktionstester (mit Hardware)" 
+sowie eine Zwischenversion, bei der die Hardware von der Reaktionstester-Logik getrennt ist ->
+
+"Schaltplan.fzz" und Schematik_Steckplatine zeigen den Aufbau der Hardware.
+Ersteres kann mit der entsprechenden Software geöffnet und verändert werden.
+
+In der Dokumention finden Sie eine Benutzerdokumentation und eine Entwicklerdokumentation. 
+Die Benutzerdokumentation beschreibt in Form einer Anleitung, wie ein Reaktionstest durchgeführt wird.
+Die Entwicklerdokumentation beinhaltet u.a Algorithmen, die dazu beitragen die Funktion des Reaktionstesters zu realisieren.
+Außerdem ist eine Materialliste enthalten, welche im Kapitel Hardware zu finden ist.
+
+
+
+
 
 
