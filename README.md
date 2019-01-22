@@ -15,7 +15,8 @@ Im Repository befinden sich mehrere Struktogramme.
 Diese sagen lediglich etwas darüber aus, wie die geschriebenen Funktionen in dem CPP-File und letztlich in der ino-Datei zusammenwirken.
 
 Das fertige Programm ist in eine ino,h und cpp-Datei aufgebaut -> "Reaktometer.zip"
-Zudem gibt es eine erste Version -> "Reaktionstester (mit Hardware)" 
+Zudem gibt es eine erste Version
+-> "Reaktionstester (mit Hardware)" 
 sowie eine Zwischenversion, bei der die Hardware von der Reaktionstester-Logik 
 getrennt ist -> "Reaktionstest.zip"
 
